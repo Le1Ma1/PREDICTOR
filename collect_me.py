@@ -98,7 +98,7 @@ def run_one(src_key, ep, pfmt, full_history=False):
     if tmax: set_state(src_key, tmax.isoformat())
     print(f"{src_key} done, {len(all_rows)} rows, {tmin}~{tmax}")
 
-# === 你負責的兩個端點 ===
+# === 兩個端點 ===
 if __name__ == "__main__":
     run_one(
         "liq_agg_6h",
