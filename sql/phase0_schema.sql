@@ -1,42 +1,55 @@
--- 六小時聚合爆倉
-create table if not exists liq_agg_6h (
-    _ts_utc timestamptz primary key,
-    long_liq_usd numeric,
-    short_liq_usd numeric
+-- Price OHLCV (6h)
+CREATE TABLE IF NOT EXISTS price_ohlcv_6h (
+    time TIMESTAMPTZ PRIMARY KEY,  -- K 線時間
+    open_price DOUBLE PRECISION,
+    high_price DOUBLE PRECISION,
+    low_price DOUBLE PRECISION,
+    close_price DOUBLE PRECISION,
+    volume_usd DOUBLE PRECISION,
+    _ts_utc TIMESTAMPTZ NOT NULL   -- 上傳時戳
 );
 
--- 六小時 Taker 主動買賣
-create table if not exists taker_flow_6h (
-    _ts_utc timestamptz primary key,
-    buy_vol_usd numeric,
-    sell_vol_usd numeric
+-- Aggregated Open Interest (6h)
+CREATE TABLE IF NOT EXISTS agg_oi_6h (
+    time TIMESTAMPTZ PRIMARY KEY,
+    oi_open DOUBLE PRECISION,
+    oi_high DOUBLE PRECISION,
+    oi_low DOUBLE PRECISION,
+    oi_close DOUBLE PRECISION,
+    _ts_utc TIMESTAMPTZ NOT NULL
 );
 
--- 六小時價格 OHLCV
-create table if not exists price_ohlcv_6h (
-    _ts_utc timestamptz primary key,
-    open numeric,
-    high numeric,
-    low numeric,
-    close numeric,
-    volume numeric
+-- Funding Rate (6h)
+CREATE TABLE IF NOT EXISTS funding_6h (
+    time TIMESTAMPTZ PRIMARY KEY,
+    fund_open DOUBLE PRECISION,
+    fund_high DOUBLE PRECISION,
+    fund_low DOUBLE PRECISION,
+    fund_close DOUBLE PRECISION,
+    _ts_utc TIMESTAMPTZ NOT NULL
 );
 
--- 六小時聚合持倉量
-create table if not exists agg_oi_6h (
-    _ts_utc timestamptz primary key,
-    open_interest_usd numeric
+-- Long Short Ratio (6h)
+CREATE TABLE IF NOT EXISTS lsr_6h (
+    time TIMESTAMPTZ PRIMARY KEY,
+    global_account_long_percent DOUBLE PRECISION,
+    global_account_short_percent DOUBLE PRECISION,
+    global_account_long_short_ratio DOUBLE PRECISION,
+    _ts_utc TIMESTAMPTZ NOT NULL
 );
 
--- 六小時資金費率
-create table if not exists funding_6h (
-    _ts_utc timestamptz primary key,
-    funding_rate numeric
+-- Liquidation Aggregated (6h)
+CREATE TABLE IF NOT EXISTS liq_agg_6h (
+    time TIMESTAMPTZ PRIMARY KEY,
+    long_liq_usd DOUBLE PRECISION,
+    short_liq_usd DOUBLE PRECISION,
+    _ts_utc TIMESTAMPTZ NOT NULL
 );
 
--- 六小時全網多空比
-create table if not exists lsr_6h (
-    _ts_utc timestamptz primary key,
-    long_ratio numeric,
-    short_ratio numeric
+-- Taker Flow (6h)
+CREATE TABLE IF NOT EXISTS taker_flow_6h (
+    time TIMESTAMPTZ PRIMARY KEY,
+    buy_usd DOUBLE PRECISION,
+    sell_usd DOUBLE PRECISION,
+    _ts_utc TIMESTAMPTZ NOT NULL
 );
