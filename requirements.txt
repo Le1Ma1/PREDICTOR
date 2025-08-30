@@ -13,5 +13,5 @@ scikit-learn
 skl2onnx
 supabase
 tensorflow
-tcn
+keras-tcn
 tf2onnx
