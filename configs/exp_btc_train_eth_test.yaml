@@ -1,0 +1,28 @@
+exp_name: BTC_6h
+freq: 6h
+seed: 42
+sequence_len: 24      # 保留不用於 Logistic
+label_horizon: 1
+cv:
+  n_splits: 3
+  embargo: 1
+tables:
+  BTC:
+    price:  btc_price_ohlcv_6h
+    agg_oi: btc_agg_oi_6h
+    funding: btc_funding_6h
+    lsr:    btc_lsr_6h
+    liq:    btc_liq_agg_6h
+    taker:  btc_taker_flow_6h
+  ETH:
+    price:  eth_price_ohlcv_6h
+    agg_oi: eth_agg_oi_6h
+    funding: eth_funding_6h
+    lsr:    eth_lsr_6h
+    liq:    eth_liq_agg_6h
+    taker:  eth_taker_flow_6h
+columns:
+  join_key: ts_utc
+  price_close: close
+env:
+  SUPABASE_DB_URL: ${SUPABASE_DB_URL}
